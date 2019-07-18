@@ -1,0 +1,22 @@
+sudo: required
+services:
+  - docker
+
+before_install:
+  - docker build -t smartdockerimage/fib-app -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run smartdockerimage/fib-app npm test -- --coverage
+
+after_success:
+  - docker build -t smartdockerimage/fib-client ./client
+  - docker build -t smartdockerimage/fib-nginx ./nginx
+  - docker build -t smartdockerimage/fib-server ./server
+  - docker build -t smartdockerimage/fib-worker ./worker
+  # Login to your docker account
+  - echo "#DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  # Push your images to docker hub
+  - docker push smartdockerimage/fib-client
+  - docker push smartdockerimage/fib-nginx
+  - docker push smartdockerimage/fib-server
+  - docker push smartdockerimage/fib-worker
