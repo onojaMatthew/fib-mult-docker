@@ -6,21 +6,37 @@
       "image": "smartdockerimage/fib-client",
       "hostname": "client",
       "essential": false,
-      "memory": 128
+      "memory": 128,
+      "command": [
+        "tail",
+        "-f",
+        "/bin/bash"
+      ]
+
     },
     {
       "name": "server",
       "image": "smartdockerimage/fib-server",
       "hostname": "api",
       "essential": false,
-      "memory": 128
+      "memory": 128,
+      "command": [
+        "tail",
+        "-f",
+        "/bin/bash"
+      ]
     }, 
     {
       "name": "worker",
       "image": "smartdockerimage/fib-worker",
       "hostname": "worker",
       "essential": false,
-      "memory": 128
+      "memory": 128,
+      "command": [
+        "tail",
+        "-f",
+        "/bin/bash"
+      ]
     },
     {
       "name": "nginx",
@@ -34,7 +50,12 @@
         }
       ],
       "links": [ "client", "server" ],
-      "memory": 128
+      "memory": 128,
+      "command": [
+        "tail",
+        "-f",
+        "/bin/bash"
+      ]
     }
   ]
 }
