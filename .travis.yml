@@ -26,7 +26,9 @@ deploy:
   region: us-east-1
   app: fib-multi-docker
   env: FibMultiDocker-env
+  # For buckect_name type s3 in services to copy bucket name of your current app
   bucket_name: elasticbeanstalk-us-east-1-441154321604
+  # For bucket_path, "app" above is the same as the bucket_path
   bucket_path: fib-multi-docker
   on:
     branch: master
