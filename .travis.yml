@@ -20,3 +20,16 @@ after_success:
   - docker push smartdockerimage/fib-nginx
   - docker push smartdockerimage/fib-server
   - docker push smartdockerimage/fib-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-1
+  app: fib-multi-docker
+  env: FibMultiDocker-env
+  bucket_name: elasticbeanstalk-us-east-1-441154321604
+  bucket_path: fib-multi-docker
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key:
+    secret: $AWS_SECRET_KEY
