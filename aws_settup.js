@@ -1,10 +1,41 @@
+// =======================================================================================
+/**
+ * Setting up environment for deploying to AWS Elasticbean Stalk
+ */
 
+ // Navigate to aws.amazon.com
+ // Search for elasticbeanstalk under services and select it
+ // On elasticbeanstalk dashboard, click on Create New Application
+ // Provide a name for your application environment in the dialogue box that will pop up and hit Create
+ // on the next page, click on Create One Now
+ // Select Web Server Environment on the new page and hit Select
+ // Scroll to Base configuration on the next page and select Mult-container Docker under Preconfigured platform
+ // Ensure Sample application is checked under Application code
+ // Scroll down and click Create Environment
+ //
+
+ /**
+  * Setting up RDS
+  */
+
+  // Go to services and type rds
+  // Scroll down to the page and select Create Database
+  // On the new page select the type of database your want to create
+  // Note: The database you select should be the same as the one you've configured in your application
+  // On this same page look for free tier and select it if you just want a test application else select production
+  // Db instance Size select db.t2.micro which is the default if you have selected free tier earlier else you may select another option
+  // Under Settings set the master username, master password and DB Instance Identifier
+  // Under Connectivity or Network and Security:
+  // Public accessibility should set to No because we don't want outside services to access our database aside the services we have in the application
+  // Still under Connectivity, select Create new VPC security group
+  // Provide a security group name in the input field
+  // Under database option, provide a name for your database
+  // click select window under backup
+  // Finally, click Create database at the bottom of the page
 const awsrdsdata = {
-  "dbname": "fib-multi-docker-postgres",
   "db-master-username": "postgres",
-  "db-master-password": "postgrespassword",
-  "database-name": "fibdatabase",
-  "new-security-group-name": "fibgroup"
+  "db-master-password": "mypostgrespassword",
+  "database-name": "fibvalues",
 }
 
 // How to create AWS Elastic Cache for Redis
@@ -14,7 +45,9 @@ const awsrdsdata = {
 // Ensure redis is checked on the next page then select CLUSTER MODE ENABLED if you need a cluster else leave it unchecked
 // Go to Node Type down the page and select t2 if you don't want the default Node Type because it is way too expensive
 // if you don't have high performance app, change number of replicas to NONE or 0 else you will pay high for it
+// Under advance Redis Setting, Create new subnet
 // Check all the available subnet
+// That's all for this. We will setup the security group later so just leave that for now.
 // Click on create at the bottom of the page
 
 
@@ -26,6 +59,7 @@ const awsrdsdata = {
 // Select Security Groups under SECURITY from the left hand side of the vpc page
 // On the Security Groups page, click on Create Security Group
 // Fill in the Security Group name, Description and VPC fields respectively. 
+// Provide a description for your security group.
 // Make sure select the default VPC of your current application from the dropdown
 
 // ========================================================================================
@@ -66,7 +100,7 @@ const awsrdsdata = {
 
 // Next service (Elasticbean Stalk)
 
-// Go to services and tyle elasticbeanstalk and select it
+// Go to services and type elasticbeanstalk and select it
 // Click on your app in the EB environment
 // On the new page click on CONFIGURATION on the sidebar
 // Look for INSTANCES and click modify at the bottom
@@ -101,6 +135,9 @@ const awsrdsdata = {
  * 
  * Note: This is going to take all the database parameters you set on RDS.
  * 
+ * For PGUSER (i.e database master username as set earlier)
+ * 1. copy the username created as masterusername and paste for PGUSER
+ * 2. copy the password you created for the masterusername and paste for PGPASSWORD
  * For PGHOST(i.e database host):
  * 1. go to services and type rds and select RDS to go to the rds dashboard
  * 2. click on the instances or database section on the side bar
