@@ -14,7 +14,7 @@ after_success:
   - docker build -t smartdockerimage/fib-server ./server
   - docker build -t smartdockerimage/fib-worker ./worker
   # Login to your docker account
-  - echo "#DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Push your images to docker hub
   - docker push smartdockerimage/fib-client
   - docker push smartdockerimage/fib-nginx
