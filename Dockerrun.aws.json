@@ -7,14 +7,6 @@
       "hostname": "client",
       "essential": false,
       "memory": 128,
-      "option_settings" :
-       [
-         {
-          "Namespace": "aws:elasticbeanstalk:command",
-          "OptionName": "Timeout",
-          "Value": "3600"
-         }
-       ],
       "command": [
         "tail",
         "-f",
@@ -27,14 +19,6 @@
       "hostname": "api",
       "essential": false,
       "memory": 128,
-      "option_settings" :
-       [
-         {
-          "Namespace": "aws:elasticbeanstalk:command",
-          "OptionName": "Timeout",
-          "Value": "3600"
-         }
-       ],
       "command": [
         "tail",
         "-f",
@@ -47,14 +31,6 @@
       "hostname": "worker",
       "essential": false,
       "memory": 128,
-      "option_settings" :
-       [
-         {
-          "Namespace": "aws:elasticbeanstalk:command",
-          "OptionName": "Timeout",
-          "Value": "3600"
-         }
-       ],
       "command": [
         "tail",
         "-f",
@@ -74,14 +50,6 @@
       ],
       "links": [ "client", "server" ],
       "memory": 128,
-      "option_settings" :
-       [
-         {
-          "Namespace": "aws:elasticbeanstalk:command",
-          "OptionName": "Timeout",
-          "Value": "3600"
-         }
-       ],
       "command": [
         "tail",
         "-f",
