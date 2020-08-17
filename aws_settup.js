@@ -178,3 +178,10 @@ const awsrdsdata = {
 // We are almost there!!! 
 // Let's add the DEPLOY Script to .travis.yml file
 
+// "option_settings": [
+//   {
+//    "Namespace": "aws:elasticbeanstalk:command",
+//    "OptionName": "Timeout",
+//    "Value": "3600"
+//   }
+// ]
